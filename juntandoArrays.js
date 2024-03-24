@@ -18,7 +18,6 @@ function isEven(x) {
  */ // ES5 syntax
  const isEven = x => x % 2 === 0;
 
-
  numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
  console.log('numbers', numbers);
 
@@ -32,6 +31,16 @@ function isEven(x) {
     console.log(x % 2 == 0);
  }); */ // Es5 sintax for function below
 
- numbers.forEach(x = console.log(`numbers.forEach: ${x} % 2 === 0`, x % 2 ===0));
+ numbers.forEach(x => console.log(`numbers.forEach: ${x} % 2 === 0`, x % 2 === 0));
 
  console.log('numbers.map(isEven)', numbers.map(isEven));
+
+ console.log('numbers.filter(isEven)', numbers.filter(isEven));
+
+/* console.log('numbers.reduce',
+  numbers.reduce(function(previous, current, index) {
+    return previous + current;
+  })
+); */ // ES5 sintax for function below
+
+console.log('numbers.reduce', numbers.reduce((previous, current) => previous + current));
