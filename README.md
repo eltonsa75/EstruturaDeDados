@@ -16,7 +16,7 @@ Estuturas de dados e algoritmo com JavaScript
 
  <div align="center">
 
-![JavaScript](https://img.shields.io/badge/javascript%23-239120?style=for-the-badge&logo=javascript&logoColor=white)
+[![JavaScript](https://img.shields.io/badge/JavaScript-yellow?style=for-the-badge&logo=javascript&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
  [![GitHub](https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github&logoColor=f8f9fa)](https://docs.github.com/)
 
  </div>
