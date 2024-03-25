@@ -12,7 +12,7 @@ Estuturas de dados e algoritmo com JavaScript
 
 </div>
 
-##  TECNOLOGIAS UTILIZADAS NO DESENVOLVIMENTO DO PROJETO
+##  TECNOLOGIAS UTILIZADAS PARA O ESTUDOS DAS ESTRUTURA DE DADOS
 
  <div align="center">
 
