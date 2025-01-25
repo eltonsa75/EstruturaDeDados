@@ -150,3 +150,62 @@ console.log(names);
 
 const names2 = ['Maéve', 'Maeve'];
 console.log(names2.sort((a, b) => a.localeCompare(b)));
+
+//====================================================================
+numbers.push(10);
+console.log(numbers.indexOf(10));
+console.log(numbers.lastIndexOf(10));
+console.log(numbers.lastIndexOf(100));
+
+//=====================================================================
+// ECMAScript 2015 - os métodos find e findIndex
+let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+function multiple0f13(element, index, array) {
+    return (element % 13 == 0);
+}
+
+console.log(numeros.find(multiple0f13));
+console.log(numeros.findIndex(multiple0f13));
+
+
+// ECMAScript 2016 - usando o método includes
+console.log(numbers.includes(15));
+console.log(numbers.includes(20));
+
+let numbers6 = [7,6,5,4,3,2,1];
+console.log(numbers6.includes(4,5));
+
+// Convertendo um array em uma string
+
+console.log(numbers.toString());
+
+const numbersstring = numbers.join('-');
+console.log(numbersstring);
+
+// ClasseArray
+
+let length = 5;
+let int16 = new Int16Array(length);
+let array16 = [];
+array16.length = length;
+for (let i=0; i<length; i++) {
+    int16[i] = i+1;
+}
+console.log(int16);
+
+// Refatorando o Array Friends
+
+// interface Person {
+//     name: string;
+//     age: number;
+// }
+
+// // const friends: {name: string, age: number}[]
+// const friends = [
+//     { name: 'Jhon', age: 30}
+//     { name: 'Ana', age: 20}
+//     { name: 'Cris', age: 25}
+// ];
+// function comparePerson(a: Person, b: Person) {
+//     // conteúdo da função comparePerson
+// }
