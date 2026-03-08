@@ -81,6 +81,10 @@ class Stack {
 
 const stack = new Stack();
 
+console.log(Object.getOwnPropertyNames(stack)); // {1}
+console.log(Object.keys(stack)); // {2}
+console.log(stack.items); // {3}
+
 // Inserindo elementos
 stack.push(5);   // items[0] = 5
 stack.push(8);   // items[1] = 8
