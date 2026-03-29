@@ -1,224 +1,253 @@
+/**
+ * ============================================================
+ * 📚 Estruturas de Dados em JavaScript
+ * Queue (Fila), Deque e Algoritmos Clássicos
+ * Autor: Elton Andrade
+ * ============================================================
+ */
+
+/**
+ * ============================================================
+ * 📌 QUEUE (FIFO - First In, First Out)
+ * O primeiro elemento a entrar é o primeiro a sair
+ * ============================================================
+ */
 class Queue {
     constructor() {
-        this.count = 0; // {1}
-        this.lowestCount = 0; // {2}
-        this.items = {}; // {3}
+        this.count = 0;         // controla o final da fila
+        this.lowestCount = 0;   // controla o início da fila
+        this.items = {};        // estrutura de armazenamento
     }
 
+    // Adiciona elemento no final da fila
     enqueue(element) {
-        this.items[this.count] = element;
-        this.count ++;
+        this.items[this.count++] = element;
     }
 
+    // Remove o primeiro elemento da fila
     dequeue() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-        const result = this.items[this.lowestCount]; // {1}
-        delete this.items[this.lowestCount]; // {2}
-        this.lowestCount++; // {3}
-        return result; // {4}
+        if (this.isEmpty()) return undefined;
+
+        const result = this.items[this.lowestCount];
+        delete this.items[this.lowestCount++];
+        return result;
     }
 
-    items = {
-        0: 5,
-        1: 8
-    };
-    count = 2;
-    lowestCount = 0;
-
-    péek() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-        return this.items[this.lowestCount];
+    // Retorna o primeiro elemento sem remover
+    peek() {
+        return this.isEmpty() ? undefined : this.items[this.lowestCount];
     }
 
-    isEmpty() {
-        return this.count - this.lowestCount === 0;
-    }
-
-    size() {
-        return this.count - this.lowestCount;
-    }
-
+    // Verifica se a fila está vazia
     isEmpty() {
         return this.size() === 0;
     }
 
-    clear(){
-        this.items = {}
-        this.count = 0;
-        this.lowestCount = 0;
-    }
-
-    toString() {
-        if (this.isEmpty()) {
-            return '';
-        }
-        let objString = `${this.items[this.lowestCount]}`;
-        for (let i = this.lowestCount + 1; i < this.count; i++) {
-            objString = `${objString},${this.items[i]}`;
-        }
-        return objString;
-        }
-}
-
-class Deque {
-    constructor() {
-        this.count = 0;        // controla o final da fila
-        this.lowestCount = 0;  // controla o início
-        this.items = {};       // armazena os elementos
-    }
-
-    // adiciona no início
-    addFront(element) {
-
-        if (this.isEmpty()) { // {1}
-            // se estiver vazia, usa addBack
-            this.addBack(element);
-
-        } else if (this.lowestCount > 0) { //  {2}
-            // se houver espaço antes do início
-            this.lowestCount--;
-            this.items[this.lowestCount] = element;
-
-        } else {
-            // move todos os elementos uma posição para frente
-            for (let i = this.count; i > this.lowestCount; i--) { // [3]
-                this.items[i] = this.items[i - 1];
-            }
-
-            this.count++;
-            this.items[this.lowestCount] = element; // {4}
-        }
-    }
-
-    // adiciona no final
-    addBack(element) {
-        this.items[this.count] = element;
-        this.count++;
-    }
-
-    // remove do início
-    removeFront() {
-        if (this.isEmpty()) { 
-            return undefined;
-        }
-
-        const result = this.items[this.lowestCount];
-        delete this.items[this.lowestCount];
-        this.lowestCount++;
-
-        return result;
-    }
-
-    // remove do final
-    removeBack() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-
-        this.count--;
-        const result = this.items[this.count];
-        delete this.items[this.count];
-
-        return result;
-    }
-
-    // retorna o primeiro elemento
-    peekFront() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-        return this.items[this.lowestCount];
-    }
-
-    // retorna o último elemento
-    peekBack() {
-        if (this.isEmpty()) {
-            return undefined;
-        }
-        return this.items[this.count - 1];
-    }
-
-    // verifica se está vazia
-    isEmpty() {
-        return this.count - this.lowestCount === 0;
-    }
-
-    // tamanho da deque
+    // Retorna o tamanho da fila
     size() {
         return this.count - this.lowestCount;
     }
 
-    // limpa a estrutura
+    // Limpa a fila
     clear() {
         this.items = {};
         this.count = 0;
         this.lowestCount = 0;
     }
 
-    // visualização
+    // Converte a fila para string
     toString() {
-        if (this.isEmpty()) {
-            return '';
-        }
+        if (this.isEmpty()) return '';
 
-        let objString = `${this.items[this.lowestCount]}`;
-
+        let result = `${this.items[this.lowestCount]}`;
         for (let i = this.lowestCount + 1; i < this.count; i++) {
-            objString = `${objString}, ${this.items[i]}`;
+            result = `${result},${this.items[i]}`;
         }
-
-        return objString;
+        return result;
     }
 }
 
-const deque = new Deque();
+/**
+ * ============================================================
+ * 📌 DEQUE (Double Ended Queue)
+ * Permite inserção e remoção nas duas extremidades
+ * ============================================================
+ */
+class Deque {
+    constructor() {
+        this.count = 0;
+        this.lowestCount = 0;
+        this.items = {};
+    }
 
-deque.addBack(5);
-deque.addBack(10);
+    // Adiciona elemento no início
+    addFront(element) {
+        if (this.isEmpty()) {
+            this.addBack(element);
 
-console.log(deque.toString()); // 5,10
+        } else if (this.lowestCount > 0) {
+            this.items[--this.lowestCount] = element;
 
-deque.addFront(1);
+        } else {
+            // Reorganiza os elementos
+            for (let i = this.count; i > this.lowestCount; i--) {
+                this.items[i] = this.items[i - 1];
+            }
+            this.items[this.lowestCount] = element;
+            this.count++;
+        }
+    }
 
-console.log(deque.toString()); // 1,5,10
+    // Adiciona elemento no final
+    addBack(element) {
+        this.items[this.count++] = element;
+    }
 
-deque.removeBack();
+    // Remove do início
+    removeFront() {
+        if (this.isEmpty()) return undefined;
 
-console.log(deque.toString()); // 1,5
+        const result = this.items[this.lowestCount];
+        delete this.items[this.lowestCount++];
+        return result;
+    }
 
-deque.removeFront();
+    // Remove do final
+    removeBack() {
+        if (this.isEmpty()) return undefined;
 
-console.log(deque.toString()); // 5
+        const result = this.items[--this.count];
+        delete this.items[this.count];
+        return result;
+    }
 
-deque.addFront(1)
-deque.addBack(5)
-deque.addBack(10)
+    // Retorna primeiro elemento
+    peekFront() {
+        return this.isEmpty() ? undefined : this.items[this.lowestCount];
+    }
 
-items = {
-  0: 1,
-  1: 5,
-  2: 10
+    // Retorna último elemento
+    peekBack() {
+        return this.isEmpty() ? undefined : this.items[this.count - 1];
+    }
+
+    // Verifica se está vazio
+    isEmpty() {
+        return this.size() === 0;
+    }
+
+    // Tamanho da deque
+    size() {
+        return this.count - this.lowestCount;
+    }
+
+    // Limpa a estrutura
+    clear() {
+        this.items = {};
+        this.count = 0;
+        this.lowestCount = 0;
+    }
 }
 
-count = 3
-lowestCount = 1;
+/**
+ * ============================================================
+ * 🎲 SHUFFLE (Algoritmo Fisher-Yates)
+ * Embaralha os elementos de um array
+ * ============================================================
+ */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
-/*============================================*/
+/**
+ * ============================================================
+ * 🎯 HOT POTATO (Simulação com Queue)
+ * Remove elementos até restar apenas um vencedor
+ * ============================================================
+ */
+function hotPotato(elementsList, num) {
 
-const queue = new Queue();
+    const queue = new Queue();
+    const eliminatedList = [];
 
-queue.enqueue('Jhon');
-queue.enqueue('Jack');
-queue.enqueue('Camila');
-console.log(queue.toString()); // Jhon, Jack
-console.log(queue.size()); // exibe 3
-console.log(queue.isEmpty()); // false
-queue.dequeue(); // remove Jhon
-queue.dequeue(); // remove Jack
-console.log(queue.toString()); // Camila
+    // adiciona todos na fila
+    elementsList.forEach(el => queue.enqueue(el));
 
-//console.log(queue.isEmpty()); // exibe true
+    // executa o jogo
+    while (queue.size() > 1) {
+
+        // passa a "batata"
+        for (let i = 0; i < num; i++) {
+            queue.enqueue(queue.dequeue());
+        }
+
+        // remove o eliminado
+        eliminatedList.push(queue.dequeue());
+    }
+
+    return {
+        eliminated: eliminatedList,
+        winner: queue.dequeue()
+    };
+}
+
+/**
+ * ============================================================
+ * 🔤 PALINDROME CHECKER (usando Deque)
+ * Verifica se uma palavra é igual de trás para frente
+ * ============================================================
+ */
+function palindromeChecker(str) {
+
+    if (!str) return false;
+
+    const deque = new Deque();
+
+    // normaliza string (minúscula e sem espaços)
+    const formatted = str.toLowerCase().replace(/\s/g, '');
+
+    // adiciona cada caractere na deque
+    for (let char of formatted) {
+        deque.addBack(char);
+    }
+
+    // compara início e fim
+    while (deque.size() > 1) {
+        if (deque.removeFront() !== deque.removeBack()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * ============================================================
+ * 🧪 TESTES
+ * ============================================================
+ */
+console.log("=== HOT POTATO ===");
+
+const names = ['Jhon', 'Jack', 'Camila', 'Ingrid', 'Carl'];
+const shuffled = shuffle([...names]);
+const rounds = Math.floor(Math.random() * 10) + 1;
+
+console.log("Ordem inicial:", shuffled);
+console.log("Rodadas:", rounds);
+
+const result = hotPotato(shuffled, rounds);
+
+result.eliminated.forEach(name => {
+    console.log(`${name} foi eliminado.`);
+});
+
+console.log(`🏆 Vencedor: ${result.winner}`);
+
+console.log("\n=== PALINDROME ===");
+
+console.log("arara:", palindromeChecker("arara"));
+console.log("elton:", palindromeChecker("elton"));

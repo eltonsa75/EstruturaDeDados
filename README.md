@@ -38,3 +38,10 @@ Caso precise de métodos específicos ou queira ampliar essa tabela, é só avis
 [![GitHub](https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github&logoColor=f8f9fa)](https://docs.github.com/)
 
  </div>
+
+
+ <div>
+Um polídromo é uma palavra, frase, número ou outra sequência de caractertes que é lido igualmente de trás para frente ou de frente para trás, por exemplo madam ou racecar.
+
+ </div>
+
